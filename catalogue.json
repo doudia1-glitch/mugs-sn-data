@@ -1,0 +1,14 @@
+[
+  {
+    "titre": "Mug Gorée Design",
+    "categorie": "paysage",
+    "image": "https://res.cloudinary.com/demo/image/upload/mugs/goree.jpg",
+    "prix": "3500 FCFA"
+  },
+  {
+    "titre": "Mug Spécial Maïdou",
+    "categorie": "nom",
+    "image": "https://res.cloudinary.com/demo/image/upload/mugs/maidou.jpg",
+    "prix": "4500 FCFA"
+  }
+]
