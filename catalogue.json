@@ -11,4 +11,10 @@
     "image": "https://res.cloudinary.com/demo/image/upload/mugs/maidou.jpg",
     "prix": "4500 FCFA"
   }
+   {
+    "titre": "Mug Gorée Design",
+    "categorie": "paysage",
+    "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776243647/Gemini_Generated_Image__apdvpk.png",
+    "prix": "3500 FCFA"
+  },
 ]
