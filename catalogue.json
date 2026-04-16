@@ -1,12 +1,14 @@
 [
   {
+    "sku": "MUG-001",
     "titre": "MUG PERSONALISABLE A VOTRE NOM",
     "categorie": "Mugs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776243647/Gemini_Generated_Image__apdvpk.png",
-    "prix": "3500 FCFA"
+    "prix": "4000 FCFA"
   },
   {
-    "titre": "MUG PERSONALISABLE A VOTRE NOM",
+    "sku": "MUG-002",
+    "titre": "MUG PERSONALISABLE",
     "categorie": "Mugs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776243656/Gemini_Generated_Image__1_v4qpt9.png",
     "prix": "4000 FCFA"
