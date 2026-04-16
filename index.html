@@ -15,19 +15,19 @@
 
     <header class="bg-white border-b sticky top-0 z-50 py-4 px-6 shadow-sm">
         <div class="flex justify-between items-center">
-            <h1 class="text-2xl font-black tracking-tighter text-black">AXOLOT BOUTIQUE</h1>
+            <h1 class="text-2xl font-black tracking-tighter text-black">MUG SN</h1>
             <span class="text-[10px] bg-black text-white px-2 py-1 rounded-full uppercase font-bold">Sénégal</span>
         </div>
     </header>
 
-    <div class="bg-white border-b sticky top-[65px] z-50">
+    <div class="bg-white border-b sticky top-[65px] z-40">
        <nav class="flex overflow-x-auto no-scrollbar space-x-2 p-3 px-4">
             <button onclick="filtrerMugs('tous')" class="whitespace-nowrap px-5 py-2 bg-black text-white rounded-full text-sm font-bold shadow-sm">Tous</button>
             <button onclick="filtrerMugs('Mugs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Mugs</button>
             <button onclick="filtrerMugs('Vetements')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vetements</button>
            <button onclick="filtrerMugs('vaisselles')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vaisselles</button>
            <button onclick="filtrerMugs('Sacs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Sacs</button>
-        </nav> 
+        </nav>
     </div>
 
     <main class="p-4">
@@ -62,7 +62,7 @@
     function afficherMugs(listeMugs) {
         conteneurCatalogue.innerHTML = '';
         listeMugs.forEach(mug => {
-            const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander l'article [REF: " + tasse.sku + "] : " + tasse.name)}`;
+            const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander : " + mug.titre)}`;
             
             conteneurCatalogue.innerHTML += `
                 <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
