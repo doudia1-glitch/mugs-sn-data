@@ -62,7 +62,7 @@
     function afficherMugs(listeMugs) {
         conteneurCatalogue.innerHTML = '';
         listeMugs.forEach(mug => {
-            const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander : " + mug.titre)}`;
+            const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander l'article [REF: " + tasse.sku + "] : " + tasse.name)}`;
             
             conteneurCatalogue.innerHTML += `
                 <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
