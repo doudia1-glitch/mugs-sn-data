@@ -16,20 +16,20 @@
     "name": "Mug Custom Design",
     "price": "5000 FCFA",
     "category": "Mug personnalisé",
-    "image": "Lien_de_ton_image_Cloudinary_ici"
+    "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776326222/1776317584725_zy14cv.png"
   },
   {
     "id": 2,
     "name": "T-shirt Oversize Noir",
     "price": "7500 FCFA",
     "category": "Vêtement",
-    "image": "Lien_de_ton_image_Cloudinary_ici"
+    "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776326222/1776317584725_zy14cv.png"
   },
   {
     "id": 3,
     "name": "Pantalon Cargo",
     "price": "12000 FCFA",
     "category": "Pantalon",
-    "image": "Lien_de_ton_image_Cloudinary_ici"
+    "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776326222/1776317584725_zy14cv.png"
   }
 ]
