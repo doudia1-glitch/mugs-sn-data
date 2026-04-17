@@ -29,7 +29,7 @@
             <button onclick="filtrerMugs('tous')" class="whitespace-nowrap px-5 py-2 bg-black text-white rounded-full text-sm font-bold shadow-sm">Tous</button>
             <button onclick="filtrerMugs('Mugs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Mugs</button>
             <button onclick="filtrerMugs('Vetements')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vetements</button>
-           <button onclick="filtrerMugs('vaisselles')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vaisselles</button>
+           <button onclick="filtrerMugs('Vaisselles')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vaisselles</button>
            <button onclick="filtrerMugs('Sacs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Sacs</button>
         </nav>
 </div>
@@ -51,7 +51,7 @@
         titre: "L'Art du Café",
         texte: "Des mugs uniques pour sublimer vos moments de pause. La qualité MUG SN à chaque gorgée."
     },
-    'Vêtements': {
+    'Vetements': {
         titre: "Style & Identité",
         texte: "Portez des vêtements qui vous ressemblent. Confort absolu et finitions premium pour le quotidien."
     },
@@ -64,6 +64,23 @@
         texte: "Le compagnon idéal de vos journées. Alliez praticité et style avec nos sacs robustes au design moderne."
     }
     // Tu peux ajouter 'Pantalon', 'Sacs', etc. ici
+    function rafraichirPresentation(cat) {
+    const bloc = document.getElementById('presentation-section');
+    const h2 = document.getElementById('titre-presentation');
+    const p = document.getElementById('texte-presentation');
+
+    // On normalise le texte pour éviter les erreurs de majuscules/accents
+    // ex: 'vaisselles' devient 'Vaisselles'
+    const categorieFormattee = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+    if (cat !== 'tous' && infosCategories[categorieFormattee]) {
+        h2.innerText = infosCategories[categorieFormattee].titre;
+        p.innerText = infosCategories[categorieFormattee].texte;
+        bloc.classList.remove('hidden');
+    } else {
+        bloc.classList.add('hidden');
+    }
+}
 };
   const numWhatsApp = "221773022018";
     const urlDonnees = "https://raw.githubusercontent.com/doudia1-glitch/mugs-sn-data/refs/heads/main/catalogue.json";
@@ -117,7 +134,25 @@
             afficherMugs(resultat);
         }
     }
+function filtrerMugs(categorie) {
+    // AJOUTE CETTE LIGNE ICI :
+    rafraichirPresentation(categorie);
 
+    // Le reste de ton code ne change pas...
+    document.querySelectorAll('nav button').forEach(btn => {
+        btn.classList.remove('bg-black', 'text-white');
+        btn.classList.add('bg-gray-200', 'text-gray-700');
+    });
+    event.target.classList.replace('bg-gray-200', 'bg-black');
+    event.target.classList.add('text-white');
+
+    if (categorie === 'tous') {
+        afficherMugs(catalogueGlobal);
+    } else {
+        const resultat = catalogueGlobal.filter(m => m.categorie === categorie);
+        afficherMugs(resultat);
+    }
+}
     // Lancement
     chargerCatalogue();
     </script>
