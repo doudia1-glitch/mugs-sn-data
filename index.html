@@ -6,7 +6,6 @@
     <title>MUG SN - Catalogue Mobile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Masquer la barre de défilement pour la navigation mobile */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -15,146 +14,131 @@
 
     <header class="bg-white border-b sticky top-0 z-50 py-4 px-6 shadow-sm">
         <div class="flex justify-between items-center">
-           <div class="flex items-center space-x-3">
-    <img src="https://res.cloudinary.com/defhxkacr/image/upload/v1776450497/Gemini_Generated_Image_5gnfk25gnfk25gnf_dhkwdi.png" alt="Logo MUG SN" class="w-10 h-10 rounded-full object-cover border border-gray-200">
-    
-    <h1 class="text-2xl font-black tracking-tighter text-black">MUG SN</h1>
-</div>
+            <div class="flex items-center space-x-3">
+                <img src="https://res.cloudinary.com/defhxkacr/image/upload/v1776450497/Gemini_Generated_Image_5gnfk25gnfk25gnf_dhkwdi.png" alt="Logo MUG SN" class="w-10 h-10 rounded-full object-cover border border-gray-200">
+                <h1 class="text-2xl font-black tracking-tighter text-black">MUG SN</h1>
+            </div>
             <span class="text-[10px] bg-black text-white px-2 py-1 rounded-full uppercase font-bold">Sénégal</span>
         </div>
     </header>
 
     <div class="bg-white border-b sticky top-[65px] z-40">
-       <nav class="flex overflow-x-auto no-scrollbar space-x-2 p-3 px-4">
+        <nav class="flex overflow-x-auto no-scrollbar space-x-2 p-3 px-4">
             <button onclick="filtrerMugs('tous')" class="whitespace-nowrap px-5 py-2 bg-black text-white rounded-full text-sm font-bold shadow-sm">Tous</button>
             <button onclick="filtrerMugs('Mugs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Mugs</button>
             <button onclick="filtrerMugs('Vetements')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vetements</button>
-           <button onclick="filtrerMugs('Vaisselles')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vaisselles</button>
-           <button onclick="filtrerMugs('Sacs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Sacs</button>
+            <button onclick="filtrerMugs('Vaisselles')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Vaisselles</button>
+            <button onclick="filtrerMugs('Sacs')" class="whitespace-nowrap px-5 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-bold">Sacs</button>
         </nav>
-</div>
+    </div>
+
     <div id="presentation-section" class="px-6 py-10 text-center bg-white border-b border-gray-200 mb-6 hidden">
-    <h2 id="titre-presentation" class="text-3xl font-black text-black mb-4 tracking-tighter italic uppercase"></h2>
-    <p id="texte-presentation" class="text-gray-500 leading-relaxed max-w-md mx-auto font-medium text-lg"></p>
-</div>
+        <h2 id="titre-presentation" class="text-3xl font-black text-black mb-4 tracking-tighter italic uppercase"></h2>
+        <p id="texte-presentation" class="text-gray-500 leading-relaxed max-w-md mx-auto font-medium text-lg"></p>
+    </div>
+
     <main class="p-4">
-        <div id="catalogue" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            </div>
+        <div id="catalogue" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></div>
     </main>
 
     <footer class="text-center py-8 text-gray-500 text-xs border-t mt-10">
         &copy; 2026 MUG SN - Designé pour le Sénégal.
     </footer>
 
-    <script>const infosCategories = {
-    'Mugs': {
-        titre: "L'Art du Café",
-        texte: "Des mugs uniques pour sublimer vos moments de pause. La qualité MUG SN à chaque gorgée."
-    },
-    'Vetements': {
-        titre: "Style & Identité",
-        texte: "Portez des vêtements qui vous ressemblent. Confort absolu et finitions premium pour le quotidien."
-    },
-    'Vaisselles': {
-        titre: "Élégance à Table",
-        texte: "Transformez vos repas en moments d'exception. Une sélection de vaisselle raffinée pour une table qui vous ressemble."
-    },
-    'Sacs': {
-        titre: "Vos Essentiels, Partout",
-        texte: "Le compagnon idéal de vos journées. Alliez praticité et style avec nos sacs robustes au design moderne."
-    }
-    // Tu peux ajouter 'Pantalon', 'Sacs', etc. ici
-    function rafraichirPresentation(cat) {
-    const bloc = document.getElementById('presentation-section');
-    const h2 = document.getElementById('titre-presentation');
-    const p = document.getElementById('texte-presentation');
+    <script>
+        const infosCategories = {
+            'Mugs': {
+                titre: "L'Art du Café",
+                texte: "Des mugs uniques pour sublimer vos moments de pause. La qualité MUG SN à chaque gorgée."
+            },
+            'Vetements': {
+                titre: "Style & Identité",
+                texte: "Portez des vêtements qui vous ressemblent. Confort absolu et finitions premium pour le quotidien."
+            },
+            'Vaisselles': {
+                titre: "Élégance à Table",
+                texte: "Transformez vos repas en moments d'exception. Une sélection de vaisselle raffinée pour une table qui vous ressemble."
+            },
+            'Sacs': {
+                titre: "Vos Essentiels, Partout",
+                texte: "Le compagnon idéal de vos journées. Alliez praticité et style avec nos sacs robustes au design moderne."
+            }
+        };
 
-    // On normalise le texte pour éviter les erreurs de majuscules/accents
-    // ex: 'vaisselles' devient 'Vaisselles'
-    const categorieFormattee = cat.charAt(0).toUpperCase() + cat.slice(1);
+        const numWhatsApp = "221773022018";
+        const urlDonnees = "https://raw.githubusercontent.com/doudia1-glitch/mugs-sn-data/refs/heads/main/catalogue.json";
+        const conteneurCatalogue = document.getElementById('catalogue');
+        let catalogueGlobal = [];
 
-    if (cat !== 'tous' && infosCategories[categorieFormattee]) {
-        h2.innerText = infosCategories[categorieFormattee].titre;
-        p.innerText = infosCategories[categorieFormattee].texte;
-        bloc.classList.remove('hidden');
-    } else {
-        bloc.classList.add('hidden');
-    }
-}
-};
-  const numWhatsApp = "221773022018";
-    const urlDonnees = "https://raw.githubusercontent.com/doudia1-glitch/mugs-sn-data/refs/heads/main/catalogue.json";
-
-    const conteneurCatalogue = document.getElementById('catalogue');
-    let catalogueGlobal = []; // Une seule variable pour tout le site
-
-    async function chargerCatalogue() {
-        try {
-            const reponse = await fetch(urlDonnees);
-            if (!reponse.ok) throw new Error("Erreur réseau");
-            
-            catalogueGlobal = await reponse.json();
-            afficherMugs(catalogueGlobal);
-        } catch (erreur) {
-            console.error("Erreur :", erreur);
-            conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500'>Erreur de chargement du catalogue...</p>";
+        async function chargerCatalogue() {
+            try {
+                const reponse = await fetch(urlDonnees);
+                if (!reponse.ok) throw new Error("Erreur réseau");
+                catalogueGlobal = await reponse.json();
+                afficherMugs(catalogueGlobal);
+            } catch (erreur) {
+                console.error("Erreur :", erreur);
+                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500'>Erreur de chargement du catalogue...</p>";
+            }
         }
-    }
 
-    function afficherMugs(listeMugs) {
-        conteneurCatalogue.innerHTML = '';
-        listeMugs.forEach(mug => {
-            const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander : " + mug.titre)}`;
-            
-            conteneurCatalogue.innerHTML += `
-                <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
-                    <img src="${mug.image}" class="w-full h-72 object-cover">
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="font-bold text-lg">${mug.titre}</h3>
-                            <span class="text-green-600 font-black">${mug.prix}</span>
+        function afficherMugs(listeMugs) {
+            conteneurCatalogue.innerHTML = '';
+            listeMugs.forEach(mug => {
+                const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander : " + mug.titre)}`;
+                conteneurCatalogue.innerHTML += `
+                    <div class="bg-white rounded-2xl shadow-sm border overflow-hidden">
+                        <img src="${mug.image}" class="w-full h-72 object-cover">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-bold text-lg">${mug.titre}</h3>
+                                <span class="text-green-600 font-black">${mug.prix}</span>
+                            </div>
+                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-[#25D366] text-white font-bold py-3 rounded-xl w-full">
+                                Commander
+                            </a>
                         </div>
-                        <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-[#25D366] text-white font-bold py-3 rounded-xl w-full">
-                            Commander
-                        </a>
-                    </div>
-                </div>`;
-        });
-    }
-
-    function filtrerMugs(categorie) {
-        // Gestion visuelle des boutons
-        document.querySelectorAll('nav button').forEach(btn => btn.classList.replace('bg-black', 'bg-gray-200'));
-        event.target.classList.replace('bg-gray-200', 'bg-black');
-
-        if (categorie === 'tous') {
-            afficherMugs(catalogueGlobal);
-        } else {
-            const resultat = catalogueGlobal.filter(m => m.categorie === categorie);
-            afficherMugs(resultat);
+                    </div>`;
+            });
         }
-    }
-function filtrerMugs(categorie) {
-    // AJOUTE CETTE LIGNE ICI :
-    rafraichirPresentation(categorie);
 
-    // Le reste de ton code ne change pas...
-    document.querySelectorAll('nav button').forEach(btn => {
-        btn.classList.remove('bg-black', 'text-white');
-        btn.classList.add('bg-gray-200', 'text-gray-700');
-    });
-    event.target.classList.replace('bg-gray-200', 'bg-black');
-    event.target.classList.add('text-white');
+        function rafraichirPresentation(cat) {
+            const bloc = document.getElementById('presentation-section');
+            const h2 = document.getElementById('titre-presentation');
+            const p = document.getElementById('texte-presentation');
+            const catFormattee = cat.charAt(0).toUpperCase() + cat.slice(1);
 
-    if (categorie === 'tous') {
-        afficherMugs(catalogueGlobal);
-    } else {
-        const resultat = catalogueGlobal.filter(m => m.categorie === categorie);
-        afficherMugs(resultat);
-    }
-}
-    // Lancement
-    chargerCatalogue();
+            if (cat !== 'tous' && infosCategories[catFormattee]) {
+                h2.innerText = infosCategories[catFormattee].titre;
+                p.innerText = infosCategories[catFormattee].texte;
+                bloc.classList.remove('hidden');
+            } else {
+                bloc.classList.add('hidden');
+            }
+        }
+
+        function filtrerMugs(categorie) {
+            rafraichirPresentation(categorie);
+            
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('bg-black', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            if (event) {
+                event.target.classList.remove('bg-gray-200', 'text-gray-700');
+                event.target.classList.add('bg-black', 'text-white');
+            }
+
+            if (categorie === 'tous') {
+                afficherMugs(catalogueGlobal);
+            } else {
+                const resultat = catalogueGlobal.filter(m => m.categorie === categorie);
+                afficherMugs(resultat);
+            }
+        }
+
+        chargerCatalogue();
     </script>
 </body>
 </html>
