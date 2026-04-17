@@ -8,7 +8,6 @@
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        /* Animation douce pour le changement de couleur */
         button { transition: all 0.3s ease; }
     </style>
 </head>
@@ -40,6 +39,17 @@
     </div>
 
     <main class="p-4">
+        <div id="info-livraison" class="mb-8 bg-emerald-50 border-l-4 border-emerald-600 p-5 rounded-r-2xl shadow-sm">
+            <div class="flex items-center mb-2">
+                <span class="text-2xl mr-3">🚚</span>
+                <h3 class="font-bold text-emerald-900 uppercase tracking-wider text-sm">Service de Livraison Mbour</h3>
+            </div>
+            <p class="text-emerald-800 font-medium leading-snug">
+                Vos articles vous seront livrés directement à l'adresse que vous nous indiquerez sur WhatsApp. 
+                <span class="block mt-2 font-black text-black text-sm uppercase italic">🤝 Paiement à la livraison après vérification.</span>
+            </p>
+        </div>
+
         <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             </div>
     </main>
@@ -123,13 +133,19 @@
         function filtrerMugs(categorie) {
             rafraichirPresentation(categorie);
             
-            // On remet tous les boutons en style "Dark"
+            // Gestion de la bannière de livraison
+            const banniere = document.getElementById('info-livraison');
+            if (categorie === 'tous') {
+                banniere.classList.remove('hidden');
+            } else {
+                banniere.classList.add('hidden');
+            }
+            
             document.querySelectorAll('nav button').forEach(btn => {
                 btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
                 btn.classList.add('bg-zinc-800', 'text-gray-300');
             });
             
-            // On met le bouton cliqué en "Vert Émeraude"
             if (event) {
                 event.target.classList.remove('bg-zinc-800', 'text-gray-300');
                 event.target.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
