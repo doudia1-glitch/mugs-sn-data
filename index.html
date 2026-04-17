@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MUG SN - Catalogue Mobile</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/defhxkacr/image/upload/v1776450497/Gemini_Generated_Image_5gnfk25gnfk25gnf_dhkwdi.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -45,8 +47,8 @@
                 <h3 class="font-bold text-emerald-900 uppercase tracking-wider text-sm">Service de Livraison Mbour</h3>
             </div>
             <p class="text-emerald-800 font-medium leading-snug">
-                Vos articles vous seront livrés directement à l'adresse que vous nous indiquerez sur WhatsApp. 
-                <span class="block mt-2 font-black text-black text-sm uppercase italic">🤝 Paiement à la livraison après vérification.</span>
+                Les articles que vous commanderez vous seront livrés à l'adresse que vous donnerez sur WhatsApp.
+                <span class="block mt-2 font-black text-black text-sm uppercase italic">🤝 Paiement sécurisé à la livraison après vérification.</span>
             </p>
         </div>
 
@@ -133,7 +135,6 @@
         function filtrerMugs(categorie) {
             rafraichirPresentation(categorie);
             
-            // Gestion de la bannière de livraison
             const banniere = document.getElementById('info-livraison');
             if (categorie === 'tous') {
                 banniere.classList.remove('hidden');
@@ -146,7 +147,7 @@
                 btn.classList.add('bg-zinc-800', 'text-gray-300');
             });
             
-            if (event) {
+            if (event && event.target.tagName === 'BUTTON') {
                 event.target.classList.remove('bg-zinc-800', 'text-gray-300');
                 event.target.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
             }
