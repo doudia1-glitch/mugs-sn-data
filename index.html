@@ -75,9 +75,15 @@
         async function chargerCatalogue() {
             try {
                 const reponse = await fetch(urlDonnees);
-                catalogueGlobal = await reponse.json();
+                if (!reponse.ok) throw new Error("Erreur réseau");
+                const donnees = await reponse.json();
+                
+                // Inversion pour afficher les derniers ajouts en haut
+                catalogueGlobal = donnees.reverse();
+                
                 afficherMugs(catalogueGlobal);
             } catch (erreur) {
+                console.error("Erreur :", erreur);
                 conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold'>Erreur de chargement...</p>";
             }
         }
@@ -85,17 +91,12 @@
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
             listeMugs.forEach(mug => {
-                // Construction du message avec le KSU
-                const messageWA = `Salam MUG SN, je veux commander :
-Désignation : ${mug.titre}
-Référence (KSU) : ${mug.ksu}
-Prix : ${mug.prix}`;
-
+                const messageWA = `Salam MUG SN, je veux commander :\nDésignation : ${mug.titre}\nRéférence (KSU) : ${mug.ksu}\nPrix : ${mug.prix}`;
                 const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(messageWA)}`;
                 
                 conteneurCatalogue.innerHTML += `
                     <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden">
-                        <img src="${mug.image}" class="w-full h-80 object-cover">
+                        <img src="${mug.image}" class="w-full h-80 object-cover" loading="lazy">
                         <div class="p-5">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
