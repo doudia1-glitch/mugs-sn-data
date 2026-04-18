@@ -1,27 +1,27 @@
 [
   {
-    "sku": "MUG-001",
+    "ksu": "MUG-001",
     "titre": "MUG PERSONALISABLE A VOTRE NOM",
     "categorie": "Mugs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776243647/Gemini_Generated_Image__apdvpk.png",
     "prix": "4000 FCFA"
   },
   {
-    "sku": "MUG-002",
+    "ksu": "MUG-002",
     "titre": "MUG PERSONALISABLE",
     "categorie": "Mugs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776243656/Gemini_Generated_Image__1_v4qpt9.png",
     "prix": "4000 FCFA"
   },
   {
-    "sku": "SAC-001",
+    "ksu": "SAC-001",
     "titre": "sac noir",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776425129/20260417_111003_jt7bid.jpg",
     "prix": "5000 FCFA"
   },
   {
-    "sku": "SAC-002",
+    "ksu": "SAC-002",
     "titre": "sac jaune",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776425097/20260417_110945_iej5a1.jpg",
