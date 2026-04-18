@@ -47,13 +47,12 @@
                 <h3 class="font-bold text-emerald-900 uppercase tracking-wider text-sm">Service de Livraison Mbour</h3>
             </div>
             <p class="text-emerald-800 font-medium leading-snug">
-                Les articles que vous commanderez vous seront livrés à l'adresse que vous donnerez sur WhatsApp.
+                Les articles que vous commanderez vous seront livrés à l'adresse que vous donnerez sur WhatsApp. 
                 <span class="block mt-2 font-black text-black text-sm uppercase italic">🤝 Paiement sécurisé à la livraison après vérification.</span>
             </p>
         </div>
 
-        <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            </div>
+        <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
     </main>
 
     <footer class="text-center py-10 text-gray-400 text-xs border-t bg-white">
@@ -62,22 +61,10 @@
 
     <script>
         const infosCategories = {
-            'Mugs': {
-                titre: "L'Art du Café",
-                texte: "Des mugs uniques pour sublimer vos moments de pause. La qualité MUG SN à chaque gorgée."
-            },
-            'Vetements': {
-                titre: "Style & Identité",
-                texte: "Portez des vêtements qui vous ressemblent. Confort absolu et finitions premium pour le quotidien."
-            },
-            'Vaisselles': {
-                titre: "Élégance à Table",
-                texte: "Transformez vos repas en moments d'exception. Une sélection de vaisselle raffinée pour une table qui vous ressemble."
-            },
-            'Sacs': {
-                titre: "Vos Essentiels, Partout",
-                texte: "Le compagnon idéal de vos journées. Alliez praticité et style avec nos sacs robustes au design moderne."
-            }
+            'Mugs': { titre: "L'Art du Café", texte: "Des mugs uniques pour sublimer vos moments de pause." },
+            'Vetements': { titre: "Style & Identité", texte: "Portez des vêtements qui vous ressemblent." },
+            'Vaisselles': { titre: "Élégance à Table", texte: "Une sélection de vaisselle raffinée." },
+            'Sacs': { titre: "Vos Essentiels, Partout", texte: "Alliez praticité et style avec nos sacs robustes." }
         };
 
         const numWhatsApp = "221773022018";
@@ -88,28 +75,36 @@
         async function chargerCatalogue() {
             try {
                 const reponse = await fetch(urlDonnees);
-                if (!reponse.ok) throw new Error("Erreur réseau");
                 catalogueGlobal = await reponse.json();
                 afficherMugs(catalogueGlobal);
             } catch (erreur) {
-                console.error("Erreur :", erreur);
-                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold'>Problème de connexion au catalogue...</p>";
+                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold'>Erreur de chargement...</p>";
             }
         }
 
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
             listeMugs.forEach(mug => {
-                const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent("Salam MUG SN, je veux commander : " + mug.titre)}`;
+                // Construction du message avec le KSU
+                const messageWA = `Salam MUG SN, je veux commander :
+Désignation : ${mug.titre}
+Référence (KSU) : ${mug.ksu}
+Prix : ${mug.prix}`;
+
+                const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(messageWA)}`;
+                
                 conteneurCatalogue.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden">
                         <img src="${mug.image}" class="w-full h-80 object-cover">
                         <div class="p-5">
                             <div class="flex justify-between items-start mb-4">
-                                <h3 class="font-black text-xl text-black uppercase tracking-tighter">${mug.titre}</h3>
+                                <div>
+                                    <h3 class="font-black text-xl text-black uppercase tracking-tighter">${mug.titre}</h3>
+                                    <p class="text-[10px] text-gray-400 font-mono">REF: ${mug.ksu}</p>
+                                </div>
                                 <span class="text-emerald-600 font-black text-lg">${mug.prix}</span>
                             </div>
-                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-black py-4 rounded-2xl w-full text-lg shadow-emerald-200 shadow-lg">
+                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-emerald-600 text-white font-black py-4 rounded-2xl w-full text-lg shadow-lg">
                                 COMMANDER
                             </a>
                         </div>
@@ -134,16 +129,11 @@
 
         function filtrerMugs(categorie) {
             rafraichirPresentation(categorie);
-            
             const banniere = document.getElementById('info-livraison');
-            if (categorie === 'tous') {
-                banniere.classList.remove('hidden');
-            } else {
-                banniere.classList.add('hidden');
-            }
+            categorie === 'tous' ? banniere.classList.remove('hidden') : banniere.classList.add('hidden');
             
             document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
+                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
                 btn.classList.add('bg-zinc-800', 'text-gray-300');
             });
             
@@ -152,12 +142,8 @@
                 event.target.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
             }
 
-            if (categorie === 'tous') {
-                afficherMugs(catalogueGlobal);
-            } else {
-                const resultat = catalogueGlobal.filter(m => m.categorie === categorie);
-                afficherMugs(resultat);
-            }
+            const resultat = categorie === 'tous' ? catalogueGlobal : catalogueGlobal.filter(m => m.categorie === categorie);
+            afficherMugs(resultat);
         }
 
         chargerCatalogue();
