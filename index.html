@@ -11,9 +11,32 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         button { transition: all 0.3s ease; }
+
+        /* Style pour la vue plein écran (Modale) */
+        #modal-image {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        #modal-image img {
+            max-width: 95%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased">
+
+    <div id="modal-image" onclick="this.style.display='none'">
+        <img id="full-img" src="" alt="Vue complète">
+    </div>
 
     <header class="bg-black sticky top-0 z-50 py-4 px-6 shadow-xl border-b border-emerald-900">
         <div class="flex justify-between items-center">
@@ -106,6 +129,13 @@
             }
         }
 
+        // Fonction pour ouvrir la modale plein écran
+        function ouvrirImage(url) {
+            const modal = document.getElementById('modal-image');
+            document.getElementById('full-img').src = url;
+            modal.style.display = 'flex';
+        }
+
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
             if(listeMugs.length === 0) {
@@ -118,7 +148,11 @@
                 
                 conteneurCatalogue.innerHTML += `
                     <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden transform transition hover:scale-[1.02]">
-                        <img src="${mug.image}" class="w-full h-80 object-cover" loading="lazy">
+                        <img src="${mug.image}" 
+                             onclick="ouvrirImage('${mug.image}')" 
+                             class="w-full h-80 object-cover cursor-zoom-in hover:opacity-90 transition-opacity" 
+                             loading="lazy" 
+                             alt="${mug.titre}">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
