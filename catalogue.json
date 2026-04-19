@@ -26,5 +26,138 @@
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/v1776425097/20260417_110945_iej5a1.jpg",
     "prix": "5000 FCFA"
+  },
+  {
+    "ksu": "SAC-003",
+    "titre": "petit sac doré CG",
+    "categorie": "Sacs",
+    "image": "https://res.cloudinary.com/defhxkacr/image/upload/q_auto/f_auto/v1776590067/photo_2026-04-19_08-59-53_vhzryz.jpg",
+    "prix": "3000 FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
+  },
+  {
+    "ksu": "",
+    "titre": "",
+    "categorie": "",
+    "image": "",
+    "prix": "FCFA"
   }
 ]
