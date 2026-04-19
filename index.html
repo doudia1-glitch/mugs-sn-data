@@ -54,10 +54,26 @@
         </div>
 
         <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+        <section class="mt-12 p-8 bg-black rounded-[2rem] border border-emerald-900 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-4 -top-4 text-6xl opacity-10">✨</div>
+            <div class="text-center relative z-10">
+                <span class="text-emerald-500 text-[10px] font-black uppercase tracking-[0.3em]">Exclusivité</span>
+                <h2 class="text-2xl font-black text-white mt-2 mb-3 uppercase tracking-tighter italic">Votre idée ici ?</h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 px-4">
+                    Vous ne trouvez pas votre bonheur ? Dites-nous quel article ou design vous aimeriez voir sur la boutique.
+                </p>
+                <a href="https://wa.me/221773022018?text=Salam%20MUG%20SN%2C%20j%27aimerais%20sugg%C3%A9rer%20un%20nouvel%20article%20%3A" 
+                   target="_blank" 
+                   class="inline-block bg-emerald-600 text-white font-black px-10 py-4 rounded-2xl text-sm hover:scale-105 active:scale-95 transition-all shadow-lg uppercase tracking-widest">
+                    Proposer un article
+                </a>
+            </div>
+        </section>
     </main>
 
-    <footer class="text-center py-10 text-gray-400 text-xs border-t bg-white">
-        &copy; 2026 <span class="text-black font-bold">MUG SN</span> - Digital Crafts à Mbour.
+    <footer class="text-center py-10 text-gray-400 text-[10px] border-t bg-white uppercase tracking-widest font-bold">
+        &copy; 2026 <span class="text-black">MUG SN</span> - Digital Crafts à Mbour.
     </footer>
 
     <script>
@@ -67,9 +83,9 @@
             'Vaisselles': { titre: "Élégance à Table", texte: "Une sélection de vaisselle raffinée." },
             'Sacs': { titre: "Vos Essentiels, Partout", texte: "Alliez praticité et style avec nos sacs robustes." },
             'Chaussures': { 
-    titre: "L'Élégance à Chaque Pas", 
-    texte: "Affirmez votre style avec des modèles qui allient confort et design moderne. Pour vos sorties ou votre quotidien, marchez avec l'assurance MUG SN." 
-}
+                titre: "L'Élégance à Chaque Pas", 
+                texte: "Affirmez votre style avec des modèles qui allient confort et design moderne. Pour vos sorties ou votre quotidien, marchez avec l'assurance MUG SN." 
+            }
         };
 
         const numWhatsApp = "221773022018";
@@ -82,36 +98,37 @@
                 const reponse = await fetch(urlDonnees);
                 if (!reponse.ok) throw new Error("Erreur réseau");
                 const donnees = await reponse.json();
-                
-                // Inversion pour afficher les derniers ajouts en haut
                 catalogueGlobal = donnees.reverse();
-                
                 afficherMugs(catalogueGlobal);
             } catch (erreur) {
                 console.error("Erreur :", erreur);
-                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold'>Erreur de chargement...</p>";
+                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold uppercase tracking-tighter'>Erreur de chargement du catalogue...</p>";
             }
         }
 
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
+            if(listeMugs.length === 0) {
+                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-gray-400 italic'>Aucun article disponible pour le moment.</p>";
+                return;
+            }
             listeMugs.forEach(mug => {
                 const messageWA = `Salam MUG SN, je veux commander :\nDésignation : ${mug.titre}\nRéférence (KSU) : ${mug.ksu}\nPrix : ${mug.prix}`;
                 const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(messageWA)}`;
                 
                 conteneurCatalogue.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden">
+                    <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden transform transition hover:scale-[1.02]">
                         <img src="${mug.image}" class="w-full h-80 object-cover" loading="lazy">
-                        <div class="p-5">
+                        <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 class="font-black text-xl text-black uppercase tracking-tighter">${mug.titre}</h3>
-                                    <p class="text-[10px] text-gray-400 font-mono">REF: ${mug.ksu}</p>
+                                    <h3 class="font-black text-xl text-black uppercase tracking-tighter leading-tight">${mug.titre}</h3>
+                                    <p class="text-[9px] text-gray-400 font-mono mt-1">ID: ${mug.ksu}</p>
                                 </div>
-                                <span class="text-emerald-600 font-black text-lg">${mug.prix}</span>
+                                <span class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-black text-sm whitespace-nowrap">${mug.prix}</span>
                             </div>
-                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-emerald-600 text-white font-black py-4 rounded-2xl w-full text-lg shadow-lg">
-                                COMMANDER
+                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-black text-white font-black py-4 rounded-2xl w-full text-sm shadow-lg hover:bg-emerald-600 transition-colors uppercase tracking-widest">
+                                Commander
                             </a>
                         </div>
                     </div>`;
