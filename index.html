@@ -12,7 +12,6 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         button { transition: all 0.3s ease; }
 
-        /* Style pour la vue plein écran (Modale) */
         #modal-image {
             display: none;
             position: fixed;
@@ -48,15 +47,27 @@
         </div>
     </header>
 
-    <div class="bg-black border-b border-emerald-900 sticky top-[65px] z-40">
-        <nav class="flex overflow-x-auto no-scrollbar space-x-2 p-3 px-4">
-            <button onclick="filtrerMugs('tous')" class="whitespace-nowrap px-6 py-2 bg-emerald-600 text-white rounded-full text-sm font-bold shadow-lg">Tous</button>
-            <button onclick="filtrerMugs('Mugs')" class="whitespace-nowrap px-6 py-2 bg-zinc-800 text-gray-300 rounded-full text-sm font-bold">Mugs</button>
-            <button onclick="filtrerMugs('Vetements')" class="whitespace-nowrap px-6 py-2 bg-zinc-800 text-gray-300 rounded-full text-sm font-bold">Vetements</button>
-            <button onclick="filtrerMugs('Vaisselles')" class="whitespace-nowrap px-6 py-2 bg-zinc-800 text-gray-300 rounded-full text-sm font-bold">Vaisselles</button>
-            <button onclick="filtrerMugs('Sacs')" class="whitespace-nowrap px-6 py-2 bg-zinc-800 text-gray-300 rounded-full text-sm font-bold">Sacs</button>
-            <button onclick="filtrerMugs('Chaussures')" class="whitespace-nowrap px-6 py-2 bg-zinc-800 text-gray-300 rounded-full text-sm font-bold">Chaussures</button>
+    <div class="bg-black border-b border-emerald-900 sticky top-[65px] z-40 p-3">
+        <div class="mb-3 px-1">
+            <input type="text" id="recherche" oninput="filtrerTout()" placeholder="Rechercher (Dior, Sac, Mug...)" 
+                class="w-full bg-zinc-900 text-white border border-emerald-900 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500 transition-all placeholder:text-gray-600">
+        </div>
+
+        <nav class="flex overflow-x-auto no-scrollbar space-x-2 mb-3 px-1">
+            <button onclick="changerCategorie('tous')" class="btn-cat whitespace-nowrap px-5 py-2 bg-emerald-600 text-white rounded-full text-xs font-bold shadow-lg">Tous</button>
+            <button onclick="changerCategorie('Mugs')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Mugs</button>
+            <button onclick="changerCategorie('Vetements')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Vetements</button>
+            <button onclick="changerCategorie('Vaisselles')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Vaisselles</button>
+            <button onclick="changerCategorie('Sacs')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Sacs</button>
+            <button onclick="changerCategorie('Chaussures')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Chaussures</button>
         </nav>
+
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar px-1">
+            <button onclick="filtrerPrix(0, 100000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-emerald-500 border border-emerald-500 rounded-lg text-[10px] font-bold uppercase">Tous les prix</button>
+            <button onclick="filtrerPrix(0, 2000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-gray-400 border border-zinc-800 rounded-lg text-[10px] font-bold uppercase">- 2000 F</button>
+            <button onclick="filtrerPrix(2001, 4000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-gray-400 border border-zinc-800 rounded-lg text-[10px] font-bold uppercase">2000 - 4000 F</button>
+            <button onclick="filtrerPrix(4001, 100000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-gray-400 border border-zinc-800 rounded-lg text-[10px] font-bold uppercase">4000 F +</button>
+        </div>
     </div>
 
     <div id="presentation-section" class="px-6 py-12 text-center bg-zinc-950 border-b border-emerald-900 mb-6 hidden">
@@ -101,20 +112,21 @@
 
     <script>
         const infosCategories = {
-            'Mugs': { titre: "L'Art du Café", texte: "Des mugs uniques pour sublimer vos moments de pause. Dites nous ce que vous desirez et on vous le fait. En plus la livraison est gratuite partout à Mbour." },
+            'Mugs': { titre: "L'Art du Café", texte: "Des mugs uniques pour sublimer vos moments de pause. Dites nous ce que vous desirez et on vous le fait. Livraison gratuite à Mbour." },
             'Vetements': { titre: "Style & Identité", texte: "Portez des vêtements qui vous ressemblent." },
             'Vaisselles': { titre: "Élégance à Table", texte: "Une sélection de vaisselle raffinée." },
             'Sacs': { titre: "Vos Essentiels, Partout", texte: "Alliez praticité et style avec nos sacs robustes." },
-            'Chaussures': { 
-                titre: "L'Élégance à Chaque Pas", 
-                texte: "Affirmez votre style avec des modèles qui allient confort et design moderne. Pour vos sorties ou votre quotidien, marchez avec l'assurance MUG SN." 
-            }
+            'Chaussures': { titre: "L'Élégance à Chaque Pas", texte: "Affirmez votre style avec des modèles modernes et confortables." }
         };
 
         const numWhatsApp = "221773022018";
         const urlDonnees = "https://raw.githubusercontent.com/doudia1-glitch/mugs-sn-data/refs/heads/main/catalogue.json";
         const conteneurCatalogue = document.getElementById('catalogue');
+        
         let catalogueGlobal = [];
+        let categorieActuelle = 'tous';
+        let prixMin = 0;
+        let prixMax = 100000;
 
         async function chargerCatalogue() {
             try {
@@ -125,21 +137,84 @@
                 afficherMugs(catalogueGlobal);
             } catch (erreur) {
                 console.error("Erreur :", erreur);
-                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold uppercase tracking-tighter'>Erreur de chargement du catalogue...</p>";
+                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold uppercase tracking-tighter'>Erreur de chargement...</p>";
             }
         }
 
-        // Fonction pour ouvrir la modale plein écran
         function ouvrirImage(url) {
             const modal = document.getElementById('modal-image');
             document.getElementById('full-img').src = url;
             modal.style.display = 'flex';
         }
 
+        function changerCategorie(cat) {
+            categorieActuelle = cat;
+            rafraichirPresentation(cat);
+            
+            // UI Boutons Catégories
+            document.querySelectorAll('.btn-cat').forEach(btn => {
+                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
+                btn.classList.add('bg-zinc-800', 'text-gray-300');
+            });
+            event.target.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
+            
+            filtrerTout();
+        }
+
+        function filtrerPrix(min, max) {
+            prixMin = min;
+            prixMax = max;
+            
+            // UI Boutons Prix
+            document.querySelectorAll('.btn-prix').forEach(btn => {
+                btn.classList.replace('border-emerald-500', 'border-zinc-800');
+                btn.classList.replace('text-emerald-500', 'text-gray-400');
+            });
+            event.target.classList.replace('border-zinc-800', 'border-emerald-500');
+            event.target.classList.replace('text-gray-400', 'text-emerald-500');
+            
+            filtrerTout();
+        }
+
+        function filtrerTout() {
+            const texte = document.getElementById('recherche').value.toLowerCase();
+            
+            const resultats = catalogueGlobal.filter(item => {
+                const matchesCat = (categorieActuelle === 'tous' || item.categorie === categorieActuelle);
+                const matchesSearch = item.titre.toLowerCase().includes(texte) || item.ksu.toLowerCase().includes(texte);
+                
+                const valeurPrix = parseInt(item.prix.replace(/[^0-9]/g, ''));
+                const matchesPrix = (valeurPrix >= prixMin && valeurPrix <= prixMax);
+
+                return matchesCat && matchesSearch && matchesPrix;
+            });
+
+            afficherMugs(resultats);
+        }
+
+        function rafraichirPresentation(cat) {
+            const bloc = document.getElementById('presentation-section');
+            const h2 = document.getElementById('titre-presentation');
+            const p = document.getElementById('texte-presentation');
+            const banniere = document.getElementById('info-livraison');
+            
+            const catFormattee = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+            if (cat !== 'tous' && infosCategories[catFormattee]) {
+                h2.innerText = infosCategories[catFormattee].titre;
+                p.innerText = infosCategories[catFormattee].texte;
+                bloc.classList.remove('hidden');
+                banniere.classList.add('hidden');
+            } else {
+                bloc.classList.add('hidden');
+                banniere.classList.remove('hidden');
+            }
+        }
+
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
             if(listeMugs.length === 0) {
-                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-gray-400 italic'>Aucun article disponible pour le moment.</p>";
+                conteneurCatalogue.innerHTML = "<p class='col-span-full text-center py-20 text-gray-400 italic'>Aucun article ne correspond à votre recherche.</p>";
                 return;
             }
             listeMugs.forEach(mug => {
@@ -167,40 +242,6 @@
                         </div>
                     </div>`;
             });
-        }
-
-        function rafraichirPresentation(cat) {
-            const bloc = document.getElementById('presentation-section');
-            const h2 = document.getElementById('titre-presentation');
-            const p = document.getElementById('texte-presentation');
-            const catFormattee = cat.charAt(0).toUpperCase() + cat.slice(1);
-
-            if (cat !== 'tous' && infosCategories[catFormattee]) {
-                h2.innerText = infosCategories[catFormattee].titre;
-                p.innerText = infosCategories[catFormattee].texte;
-                bloc.classList.remove('hidden');
-            } else {
-                bloc.classList.add('hidden');
-            }
-        }
-
-        function filtrerMugs(categorie) {
-            rafraichirPresentation(categorie);
-            const banniere = document.getElementById('info-livraison');
-            categorie === 'tous' ? banniere.classList.remove('hidden') : banniere.classList.add('hidden');
-            
-            document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
-                btn.classList.add('bg-zinc-800', 'text-gray-300');
-            });
-            
-            if (event && event.target.tagName === 'BUTTON') {
-                event.target.classList.remove('bg-zinc-800', 'text-gray-300');
-                event.target.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
-            }
-
-            const resultat = categorie === 'tous' ? catalogueGlobal : catalogueGlobal.filter(m => m.categorie === categorie);
-            afficherMugs(resultat);
         }
 
         chargerCatalogue();
