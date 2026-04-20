@@ -25,16 +25,17 @@
         }
         #modal-image img { max-width: 95%; max-height: 90%; border-radius: 15px; }
 
-        .drawer {
+        /* Animation pour la barre de recherche */
+        #search-container {
             transition: all 0.3s ease-in-out;
             max-height: 0;
             overflow: hidden;
             opacity: 0;
         }
-        .drawer.active {
-            max-height: 70px;
+        #search-container.active {
+            max-height: 60px;
             opacity: 1;
-            padding: 12px;
+            padding: 10px;
         }
     </style>
 </head>
@@ -50,42 +51,33 @@
             <h1 class="text-xl font-black text-white uppercase italic tracking-tighter">Mug <span class="text-emerald-500">SN</span></h1>
         </div>
         
-        <div class="flex items-center space-x-2">
-            <button onclick="toggleDrawer('price-container')" class="p-2 bg-zinc-900 rounded-full border border-emerald-900 text-emerald-500 active:scale-90">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </button>
-            <button onclick="toggleDrawer('search-container')" class="p-2 bg-zinc-900 rounded-full border border-emerald-900 text-emerald-500 active:scale-90">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </button>
-        </div>
+        <button onclick="toggleSearch()" class="p-2 bg-zinc-900 rounded-full border border-emerald-900 text-emerald-500 active:scale-90 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </button>
     </header>
 
-    <div id="search-container" class="drawer bg-black border-b border-emerald-900 sticky top-[57px] z-50">
-        <input type="text" id="recherche" oninput="filtrerTout()" placeholder="Rechercher (Dior, Mug, Sac...)" 
-            class="w-full bg-zinc-900 text-white border border-emerald-500 rounded-xl px-4 py-2 text-sm focus:outline-none">
+    <div id="search-container" class="bg-black border-b border-emerald-900 sticky top-[57px] z-50">
+        <input type="text" id="recherche" oninput="filtrerTout()" placeholder="Rechercher un produit (Dior, Mug, Sac...)" 
+            class="w-full bg-zinc-900 text-white border border-emerald-500 rounded-xl px-4 py-2 text-sm focus:outline-none shadow-[0_0_15px_rgba(16,185,129,0.2)]">
     </div>
 
-    <div id="price-container" class="drawer bg-black border-b border-emerald-900 sticky top-[57px] z-50">
-        <div class="flex items-center justify-between space-x-2">
-            <button onclick="filtrerPrix(0, 100000)" class="btn-prix flex-1 text-[9px] font-black text-emerald-500 uppercase border border-emerald-500 py-2 rounded-lg">Tous</button>
-            <button onclick="filtrerPrix(0, 2000)" class="btn-prix flex-1 text-[9px] font-black text-gray-500 uppercase border border-zinc-800 py-2 rounded-lg">-2000 F</button>
-            <button onclick="filtrerPrix(2001, 4000)" class="btn-prix flex-1 text-[9px] font-black text-gray-500 uppercase border border-zinc-800 py-2 rounded-lg">2-4000 F</button>
-            <button onclick="filtrerPrix(4001, 100000)" class="btn-prix flex-1 text-[9px] font-black text-gray-500 uppercase border border-zinc-800 py-2 rounded-lg">4000 F+</button>
-        </div>
-    </div>
-
-    <div class="bg-black border-b border-emerald-900 sticky top-[57px] z-40 p-2 shadow-lg">
-        <nav class="flex overflow-x-auto no-scrollbar space-x-2">
+    <div class="bg-black border-b border-emerald-900 sticky top-[57px] z-40 p-2 shadow-lg" id="filters-nav">
+        <nav class="flex overflow-x-auto no-scrollbar space-x-2 mb-2">
             <button onclick="changerCategorie('tous')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-emerald-600 text-white rounded-full text-[10px] font-black uppercase shadow-md">Tous</button>
             <button onclick="changerCategorie('Mugs')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Mugs</button>
             <button onclick="changerCategorie('Vetements')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Vetements</button>
             <button onclick="changerCategorie('Sacs')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Sacs</button>
             <button onclick="changerCategorie('Chaussures')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Chaussures</button>
         </nav>
+
+        <div class="flex items-center space-x-4 overflow-x-auto no-scrollbar border-t border-zinc-800/50 pt-2 px-1">
+            <button onclick="filtrerPrix(0, 100000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-emerald-500 uppercase">Tout Prix</button>
+            <button onclick="filtrerPrix(0, 2000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-gray-500 uppercase">- 2000 F</button>
+            <button onclick="filtrerPrix(2001, 4000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-gray-500 uppercase">2000-4000 F</button>
+            <button onclick="filtrerPrix(4001, 100000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-gray-500 uppercase">4000 F +</button>
+        </div>
     </div>
 
     <main class="p-4">
@@ -94,6 +86,7 @@
                 🚚 Livraison rapide à Mbour. Paiement à la réception.
             </p>
         </div>
+
         <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2"></div>
     </main>
 
@@ -107,15 +100,12 @@
         let prixMin = 0;
         let prixMax = 100000;
 
-        function toggleDrawer(id) {
-            const drawers = ['search-container', 'price-container'];
-            drawers.forEach(d => {
-                if(d !== id) document.getElementById(d).classList.remove('active');
-            });
-            const target = document.getElementById(id);
-            target.classList.toggle('active');
-            if(id === 'search-container' && target.classList.contains('active')) {
-                setTimeout(() => document.getElementById('recherche').focus(), 100);
+        // Fonction pour afficher/cacher la recherche
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-container');
+            searchBar.classList.toggle('active');
+            if(searchBar.classList.contains('active')) {
+                document.getElementById('recherche').focus();
             }
         }
 
@@ -149,12 +139,8 @@
 
         function filtrerPrix(min, max) {
             prixMin = min; prixMax = max;
-            document.querySelectorAll('.btn-prix').forEach(btn => {
-                btn.classList.replace('text-emerald-500', 'text-gray-500');
-                btn.classList.replace('border-emerald-500', 'border-zinc-800');
-            });
+            document.querySelectorAll('.btn-prix').forEach(btn => btn.classList.replace('text-emerald-500', 'text-gray-500'));
             event.target.classList.replace('text-gray-500', 'text-emerald-500');
-            event.target.classList.replace('border-zinc-800', 'border-emerald-500');
             filtrerTout();
         }
 
@@ -172,14 +158,14 @@
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
             if(listeMugs.length === 0) {
-                conteneurCatalogue.innerHTML = "<p class='col-span-full text-center py-10 text-gray-400 text-xs italic uppercase tracking-widest'>Aucun article trouvé.</p>";
+                conteneurCatalogue.innerHTML = "<p class='col-span-full text-center py-10 text-gray-400 text-xs italic'>Aucun article trouvé.</p>";
                 return;
             }
             listeMugs.forEach(mug => {
                 const messageWA = `Salam MUG SN, je veux commander :\n${mug.titre} (${mug.ksu})`;
                 const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(messageWA)}`;
                 conteneurCatalogue.innerHTML += `
-                    <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden mb-4">
+                    <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
                         <img src="${mug.image}" onclick="ouvrirImage('${mug.image}')" class="w-full h-80 object-cover" loading="lazy">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
