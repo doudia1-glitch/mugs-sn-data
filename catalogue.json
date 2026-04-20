@@ -228,7 +228,7 @@
     "titre": "sac dordinateur medium",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/q_auto/f_auto/v1776680283/D_yj0zr3.jpg",
-    "prix": "2000 FCFA"
+    "prix": "1500 FCFA"
   },
   {
     "ksu": "SAC-29",
@@ -242,14 +242,14 @@
     "titre": "cartable pour enfant",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/q_auto/f_auto/v1776680280/WhatsApp_Image_2026-04-20_at_09.33.57_ezgdt9.jpg",
-    "prix": "1500 FCFA"
+    "prix": "1000 FCFA"
   },
   {
     "ksu": "SAC-31",
     "titre": "sac de voyage",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/q_auto/f_auto/v1776680278/G_ickyah.jpg",
-    "prix": "2000 FCFA"
+    "prix": "1000 FCFA"
   },
   {
     "ksu": "SAC-32",
@@ -263,7 +263,7 @@
     "titre": "cartable pour fille",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/q_auto/f_auto/v1776680275/WhatsApp_Image_2026-04-20_at_09.33.58_fy06nq.jpg",
-    "prix": "1500 FCFA"
+    "prix": "1000 FCFA"
   },
   {
     "ksu": "SAC-34",
@@ -277,6 +277,6 @@
     "titre": "sac à main gris",
     "categorie": "Sacs",
     "image": "https://res.cloudinary.com/defhxkacr/image/upload/q_auto/f_auto/v1776682346/jk_wwysvp.jpg",
-    "prix": "2000 FCFA"
+    "prix": "1000 FCFA"
   }
 ]
