@@ -10,7 +10,7 @@
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        button { transition: all 0.2s ease; }
+        button { transition: all 0.3s ease; }
 
         #modal-image {
             display: none;
@@ -23,19 +23,11 @@
             align-items: center;
             cursor: zoom-out;
         }
-        #modal-image img { max-width: 95%; max-height: 90%; border-radius: 15px; }
-
-        /* Animation pour la barre de recherche */
-        #search-container {
-            transition: all 0.3s ease-in-out;
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-        }
-        #search-container.active {
-            max-height: 60px;
-            opacity: 1;
-            padding: 10px;
+        #modal-image img {
+            max-width: 95%;
+            max-height: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -45,52 +37,88 @@
         <img id="full-img" src="" alt="Vue complète">
     </div>
 
-    <header class="bg-black sticky top-0 z-50 py-3 px-5 shadow-xl border-b border-emerald-900 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <img src="https://res.cloudinary.com/defhxkacr/image/upload/v1776450497/Gemini_Generated_Image_5gnfk25gnfk25gnf_dhkwdi.png" alt="Logo" class="w-8 h-8 rounded-full border border-emerald-500">
-            <h1 class="text-xl font-black text-white uppercase italic tracking-tighter">Mug <span class="text-emerald-500">SN</span></h1>
+    <header class="bg-black sticky top-0 z-50 py-4 px-6 shadow-xl border-b border-emerald-900">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="https://res.cloudinary.com/defhxkacr/image/upload/v1776450497/Gemini_Generated_Image_5gnfk25gnfk25gnf_dhkwdi.png" alt="Logo MUG SN" class="w-10 h-10 rounded-full object-cover border-2 border-emerald-500">
+                <h1 class="text-2xl font-black tracking-tighter text-white uppercase">Mug <span class="text-emerald-500">SN</span></h1>
+            </div>
+            <span class="text-[10px] bg-emerald-600 text-white px-3 py-1 rounded-full uppercase font-bold tracking-widest">Sénégal</span>
         </div>
-        
-        <button onclick="toggleSearch()" class="p-2 bg-zinc-900 rounded-full border border-emerald-900 text-emerald-500 active:scale-90 transition-transform">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </button>
     </header>
 
-    <div id="search-container" class="bg-black border-b border-emerald-900 sticky top-[57px] z-50">
-        <input type="text" id="recherche" oninput="filtrerTout()" placeholder="Rechercher un produit (Dior, Mug, Sac...)" 
-            class="w-full bg-zinc-900 text-white border border-emerald-500 rounded-xl px-4 py-2 text-sm focus:outline-none shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-    </div>
+    <div class="bg-black border-b border-emerald-900 sticky top-[65px] z-40 p-3">
+        <div class="mb-3 px-1">
+            <input type="text" id="recherche" oninput="filtrerTout()" placeholder="Rechercher (Dior, Sac, Mug...)" 
+                class="w-full bg-zinc-900 text-white border border-emerald-900 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500 transition-all placeholder:text-gray-600">
+        </div>
 
-    <div class="bg-black border-b border-emerald-900 sticky top-[57px] z-40 p-2 shadow-lg" id="filters-nav">
-        <nav class="flex overflow-x-auto no-scrollbar space-x-2 mb-2">
-            <button onclick="changerCategorie('tous')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-emerald-600 text-white rounded-full text-[10px] font-black uppercase shadow-md">Tous</button>
-            <button onclick="changerCategorie('Mugs')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Mugs</button>
-            <button onclick="changerCategorie('Vetements')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Vetements</button>
-            <button onclick="changerCategorie('Sacs')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Sacs</button>
-            <button onclick="changerCategorie('Chaussures')" class="btn-cat whitespace-nowrap px-5 py-1.5 bg-zinc-800 text-gray-400 rounded-full text-[10px] font-black uppercase">Chaussures</button>
+        <nav class="flex overflow-x-auto no-scrollbar space-x-2 mb-3 px-1">
+            <button onclick="changerCategorie('tous')" class="btn-cat whitespace-nowrap px-5 py-2 bg-emerald-600 text-white rounded-full text-xs font-bold shadow-lg">Tous</button>
+            <button onclick="changerCategorie('Mugs')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Mugs</button>
+            <button onclick="changerCategorie('Vetements')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Vetements</button>
+            <button onclick="changerCategorie('Vaisselles')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Vaisselles</button>
+            <button onclick="changerCategorie('Sacs')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Sacs</button>
+            <button onclick="changerCategorie('Chaussures')" class="btn-cat whitespace-nowrap px-5 py-2 bg-zinc-800 text-gray-300 rounded-full text-xs font-bold">Chaussures</button>
         </nav>
 
-        <div class="flex items-center space-x-4 overflow-x-auto no-scrollbar border-t border-zinc-800/50 pt-2 px-1">
-            <button onclick="filtrerPrix(0, 100000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-emerald-500 uppercase">Tout Prix</button>
-            <button onclick="filtrerPrix(0, 2000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-gray-500 uppercase">- 2000 F</button>
-            <button onclick="filtrerPrix(2001, 4000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-gray-500 uppercase">2000-4000 F</button>
-            <button onclick="filtrerPrix(4001, 100000)" class="btn-prix whitespace-nowrap text-[9px] font-black text-gray-500 uppercase">4000 F +</button>
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar px-1">
+            <button onclick="filtrerPrix(0, 100000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-emerald-500 border border-emerald-500 rounded-lg text-[10px] font-bold uppercase">Tous les prix</button>
+            <button onclick="filtrerPrix(0, 2000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-gray-400 border border-zinc-800 rounded-lg text-[10px] font-bold uppercase">- 2000 F</button>
+            <button onclick="filtrerPrix(2001, 4000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-gray-400 border border-zinc-800 rounded-lg text-[10px] font-bold uppercase">2000 - 4000 F</button>
+            <button onclick="filtrerPrix(4001, 100000)" class="btn-prix whitespace-nowrap px-3 py-1 bg-zinc-900 text-gray-400 border border-zinc-800 rounded-lg text-[10px] font-bold uppercase">4000 F +</button>
         </div>
+    </div>
+
+    <div id="presentation-section" class="px-6 py-12 text-center bg-zinc-950 border-b border-emerald-900 mb-6 hidden">
+        <h2 id="titre-presentation" class="text-3xl font-black text-emerald-500 mb-4 tracking-tighter italic uppercase"></h2>
+        <p id="texte-presentation" class="text-gray-400 leading-relaxed max-w-md mx-auto font-medium text-lg"></p>
     </div>
 
     <main class="p-4">
-        <div id="info-livraison" class="mb-6 bg-emerald-50 border-l-4 border-emerald-600 p-4 rounded-r-xl">
-            <p class="text-emerald-900 text-xs font-bold leading-tight uppercase italic">
-                🚚 Livraison rapide à Mbour. Paiement à la réception.
+        <div id="info-livraison" class="mb-8 bg-emerald-50 border-l-4 border-emerald-600 p-5 rounded-r-2xl shadow-sm">
+            <div class="flex items-center mb-2">
+                <span class="text-2xl mr-3">🚚</span>
+                <h3 class="font-bold text-emerald-900 uppercase tracking-wider text-sm">Service de Livraison Mbour</h3>
+            </div>
+            <p class="text-emerald-800 font-medium leading-snug">
+                Les articles que vous commanderez vous seront livrés à l'adresse que vous donnerez sur WhatsApp. 
+                <span class="block mt-2 font-black text-black text-sm uppercase italic">🤝 Paiement sécurisé à la livraison après vérification.</span>
             </p>
         </div>
 
-        <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2"></div>
+        <div id="catalogue" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+        <section class="mt-12 p-8 bg-black rounded-[2rem] border border-emerald-900 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-4 -top-4 text-6xl opacity-10">✨</div>
+            <div class="text-center relative z-10">
+                <span class="text-emerald-500 text-[10px] font-black uppercase tracking-[0.3em]">Exclusivité</span>
+                <h2 class="text-2xl font-black text-white mt-2 mb-3 uppercase tracking-tighter italic">Votre idée ici ?</h2>
+                <p class="text-gray-400 text-sm leading-relaxed mb-6 px-4">
+                    Vous ne trouvez pas votre bonheur ? Dites-nous quel article ou design vous aimeriez voir sur la boutique.
+                </p>
+                <a href="https://wa.me/221773022018?text=Salam%20MUG%20SN%2C%20j%27aimerais%20sugg%C3%A9rer%20un%20nouvel%20article%20%3A" 
+                   target="_blank" 
+                   class="inline-block bg-emerald-600 text-white font-black px-10 py-4 rounded-2xl text-sm hover:scale-105 active:scale-95 transition-all shadow-lg uppercase tracking-widest">
+                    Proposer un article
+                </a>
+            </div>
+        </section>
     </main>
 
+    <footer class="text-center py-10 text-gray-400 text-[10px] border-t bg-white uppercase tracking-widest font-bold">
+        &copy; 2026 <span class="text-black">MUG SN</span> - Digital Crafts à Mbour.
+    </footer>
+
     <script>
+        const infosCategories = {
+            'Mugs': { titre: "L'Art du Café", texte: "Des mugs uniques pour sublimer vos moments de pause. Dites nous ce que vous desirez et on vous le fait. Livraison gratuite à Mbour." },
+            'Vetements': { titre: "Style & Identité", texte: "Portez des vêtements qui vous ressemblent." },
+            'Vaisselles': { titre: "Élégance à Table", texte: "Une sélection de vaisselle raffinée." },
+            'Sacs': { titre: "Vos Essentiels, Partout", texte: "Alliez praticité et style avec nos sacs robustes." },
+            'Chaussures': { titre: "L'Élégance à Chaque Pas", texte: "Affirmez votre style avec des modèles modernes et confortables." }
+        };
+
         const numWhatsApp = "221773022018";
         const urlDonnees = "https://raw.githubusercontent.com/doudia1-glitch/mugs-sn-data/refs/heads/main/catalogue.json";
         const conteneurCatalogue = document.getElementById('catalogue');
@@ -100,23 +128,16 @@
         let prixMin = 0;
         let prixMax = 100000;
 
-        // Fonction pour afficher/cacher la recherche
-        function toggleSearch() {
-            const searchBar = document.getElementById('search-container');
-            searchBar.classList.toggle('active');
-            if(searchBar.classList.contains('active')) {
-                document.getElementById('recherche').focus();
-            }
-        }
-
         async function chargerCatalogue() {
             try {
                 const reponse = await fetch(urlDonnees);
+                if (!reponse.ok) throw new Error("Erreur réseau");
                 const donnees = await reponse.json();
                 catalogueGlobal = donnees.reverse();
                 afficherMugs(catalogueGlobal);
             } catch (erreur) {
-                conteneurCatalogue.innerHTML = "<p class='text-center text-red-500 text-xs'>Erreur de chargement...</p>";
+                console.error("Erreur :", erreur);
+                conteneurCatalogue.innerHTML = "<p class='text-center py-10 text-red-500 font-bold uppercase tracking-tighter'>Erreur de chargement...</p>";
             }
         }
 
@@ -128,60 +149,101 @@
 
         function changerCategorie(cat) {
             categorieActuelle = cat;
+            rafraichirPresentation(cat);
+            
+            // UI Boutons Catégories
             document.querySelectorAll('.btn-cat').forEach(btn => {
-                btn.classList.replace('bg-emerald-600', 'bg-zinc-800');
-                btn.classList.replace('text-white', 'text-gray-400');
+                btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-lg');
+                btn.classList.add('bg-zinc-800', 'text-gray-300');
             });
-            event.target.classList.replace('bg-zinc-800', 'bg-emerald-600');
-            event.target.classList.replace('text-gray-400', 'text-white');
+            event.target.classList.add('bg-emerald-600', 'text-white', 'shadow-lg');
+            
             filtrerTout();
         }
 
         function filtrerPrix(min, max) {
-            prixMin = min; prixMax = max;
-            document.querySelectorAll('.btn-prix').forEach(btn => btn.classList.replace('text-emerald-500', 'text-gray-500'));
-            event.target.classList.replace('text-gray-500', 'text-emerald-500');
+            prixMin = min;
+            prixMax = max;
+            
+            // UI Boutons Prix
+            document.querySelectorAll('.btn-prix').forEach(btn => {
+                btn.classList.replace('border-emerald-500', 'border-zinc-800');
+                btn.classList.replace('text-emerald-500', 'text-gray-400');
+            });
+            event.target.classList.replace('border-zinc-800', 'border-emerald-500');
+            event.target.classList.replace('text-gray-400', 'text-emerald-500');
+            
             filtrerTout();
         }
 
         function filtrerTout() {
             const texte = document.getElementById('recherche').value.toLowerCase();
+            
             const resultats = catalogueGlobal.filter(item => {
                 const matchesCat = (categorieActuelle === 'tous' || item.categorie === categorieActuelle);
                 const matchesSearch = item.titre.toLowerCase().includes(texte) || item.ksu.toLowerCase().includes(texte);
-                const val = parseInt(item.prix.replace(/[^0-9]/g, ''));
-                return matchesCat && matchesSearch && (val >= prixMin && val <= prixMax);
+                
+                const valeurPrix = parseInt(item.prix.replace(/[^0-9]/g, ''));
+                const matchesPrix = (valeurPrix >= prixMin && valeurPrix <= prixMax);
+
+                return matchesCat && matchesSearch && matchesPrix;
             });
+
             afficherMugs(resultats);
+        }
+
+        function rafraichirPresentation(cat) {
+            const bloc = document.getElementById('presentation-section');
+            const h2 = document.getElementById('titre-presentation');
+            const p = document.getElementById('texte-presentation');
+            const banniere = document.getElementById('info-livraison');
+            
+            const catFormattee = cat.charAt(0).toUpperCase() + cat.slice(1);
+
+            if (cat !== 'tous' && infosCategories[catFormattee]) {
+                h2.innerText = infosCategories[catFormattee].titre;
+                p.innerText = infosCategories[catFormattee].texte;
+                bloc.classList.remove('hidden');
+                banniere.classList.add('hidden');
+            } else {
+                bloc.classList.add('hidden');
+                banniere.classList.remove('hidden');
+            }
         }
 
         function afficherMugs(listeMugs) {
             conteneurCatalogue.innerHTML = '';
             if(listeMugs.length === 0) {
-                conteneurCatalogue.innerHTML = "<p class='col-span-full text-center py-10 text-gray-400 text-xs italic'>Aucun article trouvé.</p>";
+                conteneurCatalogue.innerHTML = "<p class='col-span-full text-center py-20 text-gray-400 italic'>Aucun article ne correspond à votre recherche.</p>";
                 return;
             }
             listeMugs.forEach(mug => {
-                const messageWA = `Salam MUG SN, je veux commander :\n${mug.titre} (${mug.ksu})`;
+                const messageWA = `Salam MUG SN, je veux commander :\nDésignation : ${mug.titre}\nRéférence (KSU) : ${mug.ksu}\nPrix : ${mug.prix}`;
                 const lienWA = `https://wa.me/${numWhatsApp}?text=${encodeURIComponent(messageWA)}`;
+                
                 conteneurCatalogue.innerHTML += `
-                    <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
-                        <img src="${mug.image}" onclick="ouvrirImage('${mug.image}')" class="w-full h-80 object-cover" loading="lazy">
+                    <div class="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden transform transition hover:scale-[1.02]">
+                        <img src="${mug.image}" 
+                             onclick="ouvrirImage('${mug.image}')" 
+                             class="w-full h-80 object-cover cursor-zoom-in hover:opacity-90 transition-opacity" 
+                             loading="lazy" 
+                             alt="${mug.titre}">
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 class="font-black text-lg text-black uppercase leading-tight">${mug.titre}</h3>
-                                    <p class="text-[9px] text-gray-400 font-mono">REF: ${mug.ksu}</p>
+                                    <h3 class="font-black text-xl text-black uppercase tracking-tighter leading-tight">${mug.titre}</h3>
+                                    <p class="text-[9px] text-gray-400 font-mono mt-1">ID: ${mug.ksu}</p>
                                 </div>
-                                <span class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-black text-sm">${mug.prix}</span>
+                                <span class="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-black text-sm whitespace-nowrap">${mug.prix}</span>
                             </div>
-                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-black text-white font-black py-4 rounded-2xl w-full text-xs uppercase tracking-widest active:bg-emerald-600 transition-colors">
-                                Commander sur WhatsApp
+                            <a href="${lienWA}" target="_blank" class="flex items-center justify-center bg-black text-white font-black py-4 rounded-2xl w-full text-sm shadow-lg hover:bg-emerald-600 transition-colors uppercase tracking-widest">
+                                Commander
                             </a>
                         </div>
                     </div>`;
             });
         }
+
         chargerCatalogue();
     </script>
 </body>
